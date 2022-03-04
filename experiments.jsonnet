@@ -9,6 +9,7 @@ local qbcoref = import "jsonnets/qbcoref.jsonnet";  // transfer
 local ontonotes = import "jsonnets/ontonotes.jsonnet";  // transfer
 local arrau = import "jsonnets/arrau.jsonnet";  // transfer
 local sara = import "jsonnets/sara.jsonnet"; //transfer
+local active = import "jsonnets/active.jsonnet";
 
 (
 ontonotes.on
@@ -52,7 +53,7 @@ qbcoref.qb
 + qbcoref.qb_curve
 )
 
-+ 
++
 
 (
 arrau.data_curve_da
@@ -60,7 +61,7 @@ arrau.data_curve_da
 + arrau.data_curve_fb
 )
 
-+ 
++
 
 (
 sara.data_curve
@@ -99,4 +100,13 @@ icoref.main
 + icoref.evaluation
 + icoref.unused
 + icoref.main_mention_xe
+)
+
++
+
+(
+active.active_preco
++ active.active_debug
++ active.userstudy
++ active.active_qbcoref
 )
