@@ -1,18 +1,9 @@
-# Incremental Coreference Resolution
+# Adapting Coreference Resolution Models through Active Learning
 
-The code in this repository is associated with the following papers:
+The code in this repository is associated with "Adapting Coreference Resolution Models through Active Learning" (Yuan et al., ACL 2022). It is forked from [this repository](https://github.com/pitrack/incremental-coref), which is associated with 
+[Moving on from OntoNotes: Coreference Resolution Model Transfer](https://arxiv.org/abs/2104.08457) (Xia and Van Durme, EMNLP 2021). 
 
-* [current branch] [Moving on from OntoNotes: Coreference Resolution Model Transfer](https://arxiv.org/abs/2104.08457). Patrick Xia and Benjamin Van Durme. EMNLP 2021.
-
-* [[Docker Hub](https://hub.docker.com/r/hltcoe/lome)] [LOME: Large Ontology Multilingual Extraction](https://aclanthology.org/2021.eacl-demos.19/). Patrick Xia*, Guanghui Qin*, Siddharth Vashishtha, Yunmo Chen, Tongfei Chen, Chandler May, Craig Harman, Kyle Rawlins, Aaron Steven White, Benjamin Van Durme. EACL 2021 System Demos. [Demo](https://nlp.jhu.edu/demos/lome/). 
-
-* [[#emnlp2020 branch]](https://github.com/pitrack/incremental-coref/tree/emnlp2020) [Incremental Neural Coreference Resolution in Constant Memory](https://aclanthology.org/2020.emnlp-main.695/). Patrick Xia, João Sedoc, Benjamin Van Durme. EMNLP 2020.
-
-In its current state, there are likely still lingering issues/missing documentation in this repository. If you have any questions, please raise an issue or email me. I would also be happy to debug issues related to this codebase over video/voice calls.
-
-## About
-
-The icoref model is a PyTorch-based incremental document reader. Some of the underlying components, like the span representations, are built of prior work on Coreference Resolution (Lee et al., 2017; 2018, Joshi et al., 2019). Details of the model can be found in the [EMNLP 2020 paper](https://aclanthology.org/2020.emnlp-main.695/). 
+The active learning simulations make use of the ICoref model. If you are just looking to use the ICoref model without active learning, it is recommended to go to Patrick's repo linked above.
 
 ## Getting Started
 
