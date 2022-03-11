@@ -7,7 +7,7 @@ The active learning simulations make use of the ICoref model. If you are just lo
 
 ## Getting Started
 
-To use the code, the high-level process is to convert data into a minimized jsonlines format and create a [jsonnet](https://jsonnet.org/) experiment configuration. Then, running `python inference.py <exp name>` or `python trainer.py <exp name>` should run inference or training over the files.
+To use the code, the high-level process is to convert data into a minimized jsonlines format and create a [jsonnet](https://jsonnet.org/) experiment configuration. Then, running `python active.py <experiment name>` should run the active learning simulation.
 
 ### Local setup
 
@@ -18,7 +18,8 @@ In the main repo, create `local.jsonnet`, which is the local configuration file.
   data_dir: "", // location of data files
   encoders_dir: "", // location of encoders, could be the same as above
   log_root: "", // location of logs
-  gpu_gb: "" // max gpu limit, in GB. Used in gradient accumulation
+  gpu_gb: "", // max gpu limit, in GB. Used in gradient accumulation
+  simulation_dir: "" // location of simulation output files
 }
 ```
 
@@ -26,13 +27,18 @@ For packages, the primary ones are jsonnet(=0.16.0), torch(=1.7.0), and transfor
 
 To set up all of this, run `pip install -r requirements.txt`.
 
+### Source model
+
+In the paper, we use the best checkpoint of ICoref trained on OntoNotes (from EMNLP 2020) as the source model to initialize the active learning simulation. Please download the [`checkpoint.bin` here](https://nlp.jhu.edu/incremental-coref/models/checkpoint.bin) (1.7GB)
+and place it under this directory.
+
 ### Defining experiments
 
 The config files are sorted into [jsonnets](https://jsonnet.org/), which is a data templating language. The main model parameters are defined in `jsonnets/base.jsonnet`, encoder parameters in `jsonnets/encoder.jsonnet`, and data parameters in `jsonnets/data.jsonnet`. Local paths, as mentioned above, are in `local.jsonnet`. The remaining files are individual files related to different experiments/projects. `jsonnets/verify_jsonnet.py` wraps the jsonnet import and load function to quickly check for syntax errors by running `python verify_jsonnet.py <jsonnet_file>`.
 
 The experiments themselves are then imported at the top-level `experiments.jsonnet`. This is the file ultimately read by the code.
 
-#### OntoNotes example
+<!-- #### OntoNotes example
 
 For example, we can use [OntoNotes 5.0, official LDC release](https://catalog.ldc.upenn.edu/LDC2013T19). Run `conversion_scripts/minimize.py` (same as in [prior work](https://github.com/mandarjoshi90/coref)) to convert the OntoNotes format to jsonlines. Place these into `$data_dir/ontonotes`. Next, in `jsonnets/data.jsonnet`, create a `Dataset` config, specifying the paths to the exact files, e.g. 
 
@@ -56,22 +62,8 @@ In the EMNLP 2020 paper, we reused trained parameters. To get these parameters, 
 python conversion_scripts/convert_tf_to_pytorch.py <path_to_model>/model.max.ckpt <path_to_model>/torch_scorer_vars.bin
 ``` 
 
-After the first epoch, the average coref on the dev set F1 should be around 71-72.
+After the first epoch, the average coref on the dev set F1 should be around 71-72. -->
 
-
-
-#### Dataless Example with XLMR tokenizer
-
-It is possible to run models without data by loading a model without specifying a path to the data. This could be useful for using the coref model as part of a larger system (as we do in LOME), or for loading data from different sources (e.g. for analysis of specific examples). To do so, use the `Dataless` constructor in `data.jsonnet`. As an example, `xlmr_ml_true_24_dataless` corresponds to the `xlmr_ml_true_24` config except the paths to the data are empty strings.
-
-To load/use the model, use `run_xlmr.py` in the following way (turn off logging by commenting out or changing `logging.basicConfig(level=logging.INFO)`):
-
-```
-# run()
-python run.py xlmr_ml_true_24_dataless <input jsonlines file> <output jsonlines file> False
-# run_concrete()
-python run.py xlmr_ml_true_24_dataless <input concrete comm> <output concrete comm> True
-```
 
 
 ## Training and evaluation
@@ -98,27 +90,27 @@ To evaluate the best model (from EMNLP 2020), download the [`checkpoint.bin` her
 and place it under `$log_dir/spanbert_large/spb_on_512/`, which is the experimental configuration it matches.
 
 
-### Pretrained Models
+<!-- ### Pretrained Models
 
 In the EMNLP2021 paper, we make use of three "base" models that can be downloaded here. These only contain the checkpoint.bin files, so they need to be used with the corresponding encoder and jsonnet config. They are different sizes because transfer-on reuses publicly available encoder while transfer-en includes finetuned XLM-R and transfer-pc includes a fine-tuned SpanBERT model. If requested, we can reduce the size of these files and upload the encoders onto HuggingFace models too.
 
 1. transfer-on: [1.7G](https://nlp.jhu.edu/coref-transfer/models/ontonotes.tar)
 2. transfer-en: [6.7G](https://nlp.jhu.edu/coref-transfer/models/ontonotes_en.tar)
-3. transfer-pc: [4.2G](https://nlp.jhu.edu/coref-transfer/models/preco.tar)
+3. transfer-pc: [4.2G](https://nlp.jhu.edu/coref-transfer/models/preco.tar) -->
 
 ## Other
 
-### Overriding arguments
+<!-- ### Overriding arguments
 
 Most arguments can be overridden in the command-line with by adding the name and argument after the experiment name, e.g. `python inference.py spb_on_512 threshold=-16 method="mean"`. Overriding dicts is trickier and may not work. Always check the printed config to make sure the arguments were correctly overridden.
 
-Overriding arguments is useful for loading specific checkpoints, we do in the EMNLP 2021 paper. See `command_list` in `domain/base_data_curve.py` for another example.
+Overriding arguments is useful for loading specific checkpoints, we do in the EMNLP 2021 paper. See `command_list` in `domain/base_data_curve.py` for another example. -->
 
-### Domain Transfer
+<!-- ### Domain Transfer
 
 In the EMNLP 2021 paper, we perform extensive experiments for domain transfer. Most of experiments follow the pattern described in this README of curating and processing a dataset, writing a config, training a lot of models, and then evaluating them. To do this, we wrote a job queuing/submission scripts (in the `domain/` subdirectory), added more features to `eval_all.py`, and wrote plotting code (in `analysis/`). There were a few modeling changes around 1) how frequent we perform the backwards pass; 2) handling singletons; and 3) finetuning the encoder. These are all updated in the `base.jsonnet` file to match what was done in the EMNLP2020 paper and then overridden in specific experiment configs.
 
-Additional instructions for reproducing the EMNLP 2021 paper can be found in `domain/README.md`
+Additional instructions for reproducing the EMNLP 2021 paper can be found in `domain/README.md` -->
 
 ### Verifying Setup
 
