@@ -45,7 +45,7 @@ local qbcoref = import "qbcoref.jsonnet";
     ),
 
     local UserStudy(session, spans, docs) = (
-        ActivePreco(57, spans, docs, "ment-ent", 1) +
+        ActivePreco(67, spans, docs, "ment-ent", 1) +
         base.Name("userstudy") +
         {user: "",
         session: session
@@ -69,11 +69,11 @@ local qbcoref = import "qbcoref.jsonnet";
 
     active_preco: {
         ["active_preco_"+ seed + "_" +  num_spans + "_" + max_docs + "_" + strategy + "_" + cycles]: ActivePreco(seed, num_spans, max_docs, strategy, cycles)
-        for num_spans in [0,10, 20, 50]
-        for max_docs in [0,1,5,10,20,50]
+        for num_spans in [0, 20, 50]
+        for max_docs in [0, 1, 5, 20, 50]
         for seed in [67, 312, 57, 29, 8]
-        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "mixed-ent", "bandit", "noise", "li-ent"]
-        for cycles in [0, 6, 15, 30]
+        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "noise", "li-ent"]
+        for cycles in [0, 6, 15]
     },
 
     userstudy: {
@@ -85,11 +85,11 @@ local qbcoref = import "qbcoref.jsonnet";
 
     active_qbcoref: {
         ["active_qbcoref_"+ seed + "_" +  num_spans + "_" + max_docs + "_" + strategy + "_" + cycles]: ActiveQb(seed, num_spans, max_docs, strategy, cycles)
-        for num_spans in [0,10, 20, 40, 50, 100]
-        for max_docs in [0,1, 5, 20, 40]
+        for num_spans in [0, 20, 40]
+        for max_docs in [0, 1, 5, 20, 40]
         for seed in [67, 312, 57, 29, 8]
-        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "mixed-ent", "bandit", "noise", "li-ent"]
-        for cycles in [0, 3, 6, 10, 20, 30]
+        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "noise", "li-ent"]
+        for cycles in [0, 10, 20]
     },
 
 

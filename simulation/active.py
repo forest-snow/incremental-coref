@@ -379,8 +379,8 @@ def change_log(logfile):
 
 if __name__ == "__main__":
     config = util.initialize_from_env(use_overrides=True)
-    config['src_path'] = pathlib.Path('/exp/myuan/logs/spb_on_512/checkpoint.bin')
-    config['sim_dir'] = pathlib.Path('/exp/myuan/simulation') / config['run_name']
+    config['src_path'] = pathlib.Path('checkpoint.bin')
+    config['sim_dir'] = pathlib.Path(config['simulation_dir']) / config['run_name']
     util.set_seed(config)
     train_pool = util.load_data(config[f'train_path'],
             num_examples=config['num_train_examples'])

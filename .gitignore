@@ -1,2 +1,5 @@
 .python-version
 __pycache__/
+*/checkpoint.bin
+simulation/local.jsonnet
+

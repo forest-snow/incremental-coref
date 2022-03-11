@@ -3,6 +3,7 @@ local local_config = import "../local.jsonnet";
 local encoders = import "encoders.jsonnet";
 {
   local log_root = local_config.log_root, // all logs live here
+  local simulation_dir = local_config.simulation_dir, // all simulation results live here
 
   trunc_linscale(distance): {
     evict_fn: {
@@ -45,6 +46,7 @@ local encoders = import "encoders.jsonnet";
     run_name: name,
     log_dir: log_root + "/" + self.run_name,
     log_path: self.log_dir + "/" + "checkpoint.bin",
+    simulation_dir: simulation_dir,
   },
 
   // Scorer Vars
