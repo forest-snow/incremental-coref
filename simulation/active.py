@@ -81,10 +81,10 @@ def sample_spans(model, dataset, queries, config, scoring, cycle):
 
     scorer = Scorer(model, dataset)
     SCORING = {
-        'random': scorer.random,
+        'random-ment': scorer.random_ment,
         'mention': scorer.mention_detection,
         'cond-ent':scorer.conditional_entropy,
-        'noise':scorer.noise,
+        'random':scorer.random,
         'ment-ent':scorer.mention_entropy,
         'joint-ent':scorer.joint_entropy,
         'clust-ent':scorer.cluster_entropy,

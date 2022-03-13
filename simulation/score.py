@@ -30,7 +30,7 @@ class Scorer():
         if torch.cuda.is_available():
             torch.cuda.reset_max_memory_allocated()
 
-    def noise(self, **kwargs):
+    def random(self, **kwargs):
         """
         Random sampling but with more spans retained.
         """
@@ -41,7 +41,7 @@ class Scorer():
             span_score['score'] = np.random.uniform()
         return span_scores
 
-    def random(self, **kwargs):
+    def random_ment(self, **kwargs):
         """Random sampling of retained spans"""
         # call mention_detection to prune spans
         span_scores = self.mention_detection()

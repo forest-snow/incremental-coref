@@ -72,7 +72,7 @@ local qbcoref = import "qbcoref.jsonnet";
         for num_spans in [0, 20, 50]
         for max_docs in [0, 1, 5, 20, 50]
         for seed in [67, 312, 57, 29, 8]
-        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "noise", "li-ent"]
+        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "random-ment", "li-ent"]
         for cycles in [0, 6, 15]
     },
 
@@ -88,7 +88,7 @@ local qbcoref = import "qbcoref.jsonnet";
         for num_spans in [0, 20, 40]
         for max_docs in [0, 1, 5, 20, 40]
         for seed in [67, 312, 57, 29, 8]
-        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "noise", "li-ent"]
+        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "random-ment", "li-ent"]
         for cycles in [0, 10, 20]
     },
 
