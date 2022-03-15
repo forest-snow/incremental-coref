@@ -19,8 +19,8 @@ DATASET='preco'
 ######
 
 # Debugging experiments
-#python active.py active_debug
+python active.py active_debug
 
 # Run simulation
-python active.py "active_${DATASET}_${SEED}_${NUM_SPANS}_${MAX_DOCS}_${STRATEGY}_${NUM_CYCLES}"
+#python active.py "active_${DATASET}_${SEED}_${NUM_SPANS}_${MAX_DOCS}_${STRATEGY}_${NUM_CYCLES}"
 

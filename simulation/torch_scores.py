@@ -119,6 +119,7 @@ class SpanScorer(torch.nn.Module):
     else:
       # Assume batch size 1
       k = int(num_words * self.top_span_ratio)
+      k = min(k, len(total_scores))
       top_scores, top_k_indices = torch.topk(total_scores, k=k)
       top_span_embs = torch.index_select(span_embs, 1, top_k_indices).squeeze(0)
       return (top_span_embs, top_scores, top_k_indices)

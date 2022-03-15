@@ -23,7 +23,7 @@ local qbcoref = import "qbcoref.jsonnet";
         encoders.finetune_top(24) +
         data.Preco +
         base.Name("active_debug") +
-        Active(67, 10, 5, "random", 3) +
+        Active(67, 10, 5, "clust-ent", 3) +
         {singleton_eval: true,
             mentions: true,
             num_train_examples: 50,
@@ -72,7 +72,7 @@ local qbcoref = import "qbcoref.jsonnet";
         for num_spans in [0, 20, 50]
         for max_docs in [0, 1, 5, 20, 50]
         for seed in [67, 312, 57, 29, 8]
-        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "random-ment", "li-ent"]
+        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "random-ment", "li-clust-ent"]
         for cycles in [0, 6, 15]
     },
 
@@ -88,7 +88,7 @@ local qbcoref = import "qbcoref.jsonnet";
         for num_spans in [0, 20, 40]
         for max_docs in [0, 1, 5, 20, 40]
         for seed in [67, 312, 57, 29, 8]
-        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "random-ment", "li-ent"]
+        for strategy in ["random", "ment-ent", "clust-ent", "cond-ent", "joint-ent", "random-ment", "li-clust-ent"]
         for cycles in [0, 10, 20]
     },
 

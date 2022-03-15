@@ -88,7 +88,7 @@ def sample_spans(model, dataset, queries, config, scoring, cycle):
         'ment-ent':scorer.mention_entropy,
         'joint-ent':scorer.joint_entropy,
         'clust-ent':scorer.cluster_entropy,
-        'li-ent':scorer.li_entropy
+        'li-clust-ent':scorer.li_entropy
         }
 
 
