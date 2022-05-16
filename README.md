@@ -27,7 +27,7 @@ If you use this repo or the ICoref model, please cite:
   title={Adapting Active Learning Models through Active Learning},
   author={Michelle Yuan and Patrick Xia and Chandler May and Benjamin {Van Durme} and Jordan Boyd-Graber},
   year={2022},
-  booktitle={Proceedings of EMNLP},
+  booktitle={Proceedings of ACL},
 }
 ```
 
